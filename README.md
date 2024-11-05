@@ -15,3 +15,5 @@ Usage
 npm run dev
 vite build
 ```
+Setup gh-pages
+https://github.com/gitname/react-gh-pages
