@@ -1,8 +1,6 @@
-import './App.css'
-
 function App() {
   return (
-    <div>
+    <div className="flex flex-cols items-center justify-center">
       <span className='text-3xl font-bold underline'>hello world</span>
     </div>
   )
