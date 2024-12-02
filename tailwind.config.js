@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
 
 export default {
   content: [
@@ -20,12 +19,12 @@ export default {
     },
     colors: {
       transparent: 'transparent',
-      black: colors.black,
-      white: colors.white,
-      background: "#30343F",
+      black: "#000000",
+      white: "#FFFFFF",
+      background: "#21242c",
       text: "#FAFAFF",
-      overlay1: "#1E2749",
-      overlay2: "#273469",
+      overlay1: "#59577F",
+      overlay2: "#D2BCF3",
       overlay3: "#273469"
     }
   },

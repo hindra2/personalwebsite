@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {!showMain && (
           <StartAnimation onAnimationComplete={handleAnimationComplete} />
         )}
@@ -28,7 +28,8 @@ function App() {
             <MainPage />
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
+      <MainPage />
     </>
   );
 }
