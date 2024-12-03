@@ -2,7 +2,7 @@ import SkillNetwork from "../components/skill-network";
 
 const Skills: React.FC = () => {
     return (
-        <div className="text-3xl flex flex-col w-full items-center justify-center">
+        <div className="text-3xl flex flex-col w-full h-screen items-center justify-center">
             <span className="text-text">
                 Skills
             </span>

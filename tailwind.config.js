@@ -21,7 +21,7 @@ export default {
       transparent: 'transparent',
       black: "#000000",
       white: "#FFFFFF",
-      background: "#21242c",
+      background: "#15171c",
       text: "#FAFAFF",
       overlay1: "#59577F",
       overlay2: "#D2BCF3",
