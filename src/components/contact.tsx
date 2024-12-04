@@ -5,7 +5,7 @@ const Contact: React.FC = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 p-4">
       <div className="max-w-screen-xl mx-auto flex justify-center items-center">
-        <div className='flex gap-8 bg-overlay1/50 rounded-full px-10 py-3'>
+        <div className='flex gap-8 bg-overlay1/40 backdrop-blur-sm rounded-full px-10 py-3'>
           <a 
             href="mailto:harold.d.indra.uni@gmail.com" 
             className="flex items-center gap-2 text-text hover:text-overlay2 transition-colors"

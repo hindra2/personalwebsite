@@ -53,24 +53,26 @@ const MainPage = () => {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         showNav ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}>
-        <div className="flex justify-center items-center p-4 bg-background">
-          <h1 className="mr-8 text-xl font-bold">Harold Indra</h1>
-          <div className="flex gap-4">
-            {[
-              { id: 'about', label: 'About' },
-              { id: 'skills', label: 'Skills' },
-              { id: 'projects', label: 'Projects' }
-            ].map((section) => (
-              <button
-                key={section.id}
-                onClick={() => scroll(section.id)}
-                className={`px-5 py-2 rounded-full transition-all duration-300 ${
-                  activeSection === section.id ? 'bg-overlay1' : 'hover:bg-overlay1/50'
-                }`}
-              >
-                {section.label}
-              </button>
-            ))}
+        <div className="flex justify-center items-center p-4">
+          <div className="flex bg-overlay1/40 backdrop-blur-sm rounded-full items-center justify-center px-5 py-1">
+            <button className="mr-8 text-xl font-bold" onClick={() => scroll("intro")}>Harold Indra</button>
+            <div className="flex gap-4">
+              {[
+                { id: 'about', label: 'About' },
+                { id: 'skills', label: 'Skills' },
+                { id: 'projects', label: 'Projects' }
+              ].map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scroll(section.id)}
+                  className={`px-5 py-2 rounded-full transition-all duration-300 ${
+                    activeSection === section.id ? 'bg-overlay1' : 'hover:bg-overlay1/50'
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </nav>
