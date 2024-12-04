@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import StartAnimation from './components/start-animation';
+// import React, { useState } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import StartAnimation from './components/start-animation';
 import MainPage from './mainpage/mainpage';
 
 function App() {
-  const [showMain, setShowMain] = useState(false);
+  // const [showMain, setShowMain] = useState(false);
 
-  const handleAnimationComplete = () => {
-    setTimeout(() => setShowMain(true), 500);
-  };
+  // const handleAnimationComplete = () => {
+  //   setTimeout(() => setShowMain(true), 500);
+  // };
 
   return (
     <>
