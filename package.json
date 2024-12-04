@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://hindra2.github.io/personalwebsite",
+  "homepage": "https://hindra2.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
