@@ -6,6 +6,9 @@ import Projects from "../pages/projects";
 import Skills from "../pages/skills";
 import Contact from "../components/contact";
 
+import logo from '../assets/logo.svg'
+
+
 const MainPage = () => {
   const [activeSection, setActiveSection] = useState("intro");
   const [showNav, setShowNav] = useState(false);
@@ -50,12 +53,12 @@ const MainPage = () => {
 
   return (
     <div className="relative min-h-screen text-text bg-background overflow-x-hidden overflow-y-hidden">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        showNav ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}>
         <div className="flex justify-center items-center p-4">
           <div className="flex bg-overlay1/40 backdrop-blur-sm rounded-full items-center justify-center px-5 py-1">
-            <button className="mr-8 text-xl font-bold" onClick={() => scroll("intro")}>Harold Indra</button>
+            <button className="mr-5 text-xl font-bold" onClick={() => scroll("intro")}>
+              <img src={logo} alt="Logo" width={40}/> 
+            </button>
             <div className="flex gap-4">
               {[
                 { id: 'about', label: 'About' },
