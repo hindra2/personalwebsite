@@ -12,30 +12,22 @@ const Popup = ({ project, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 bg-black/95 items-center justify-center flex"
+      className="fixed inset-0 z-50 bg-background/50 items-center justify-center flex"
       onClick={handleBackdropClick}
     >
       <motion.div 
-        className="h-full overflow-y-auto bg-background w-[60%]"
+        className="h-[75vh] overflow-y-auto bg-base1 w-[80%] rounded-xl border border-overlay1 drop-shadow-xl"
         initial={{ y: '100%' }}
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
       >
-        <div className="relative w-full h-[50vh] md:h-[60vh]">
-          <img 
-            src={project.imageUrl}
-            alt={project.title}
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-        </div>
-
-        <div className="relative bg-background min-h-[50vh]">
-          <div className="max-w-4xl mx-auto px-8 py-12">
-            <h2 className="text-4xl font-bold text-text mb-8">
+        <div className="relative bg-base1 min-h-[50vh]">
+          <div className="max-w-4xl mx-auto py-8">
+            <h2 className="text-4xl font-bold text-text">
               {project.title}
             </h2>
-            <div className="text-sm text-gray-400 uppercase tracking-wider mb-2">
+            <div className="text-sm text-gray-400 font-bold tracking-wider mb-8">
               {project.desc}
             </div>
             <div className="text-text space-y-6">

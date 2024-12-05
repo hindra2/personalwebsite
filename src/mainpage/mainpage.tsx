@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+
 import Intro from "@/pages/intro";
 import AboutMe from "@/pages/aboutme";
 import Projects from "@/pages/projects";
@@ -46,41 +48,31 @@ const ScrollPage = () => {
 
   return (
     <div className="relative h-screen overflow-hidden bg-background text-text">
-      {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50">
         <div className="flex justify-center items-center p-4">
-          <div className="flex bg-overlay1/40 backdrop-blur-lg rounded-full items-center justify-center px-5 py-1">
+          <div className="flex bg-overlay1/40 backdrop-blur-lg rounded-full items-center justify-center px-5 py-1 border border-overlay1">
             <div className="flex gap-4">
-              <button
-                onClick={() => navigate(0)}
-                className={`px-5 py-2 rounded-full transition-all duration-300`}
-              >
+              <button onClick={() => navigate(0)}>
                 <img src={"/favicon.svg"} alt="Logo" width={40}/>  
               </button>
-              <button
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 1 ? 'bg-overlay1 text-xl' : ''}`}
                 onClick={() => navigate(1)}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
-                  activeIndex === 1 ? 'bg-overlay1 text-xl' : 'hover:bg-overlay1/50'
-                }`}
               >
                 About Me
-              </button>
-              <button
+              </motion.button>
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 2 ? 'bg-overlay1 text-xl' : ''}`}
                 onClick={() => navigate(2)}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
-                  activeIndex === 2 ? 'bg-overlay1 text-xl'  : 'hover:bg-overlay1/50'
-                }`}
               >
                 Skills
-              </button>
-              <button
+              </motion.button>
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 3 ? 'bg-overlay1 text-xl' : ''}`}
                 onClick={() => navigate(3)}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
-                  activeIndex === 3 ? 'bg-overlay1 text-xl' : 'hover:bg-overlay1/50'
-                }`}
               >
                 Projects
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>

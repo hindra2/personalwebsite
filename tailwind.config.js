@@ -22,6 +22,7 @@ export default {
       black: "#000000",
       white: "#FFFFFF",
       background: "#15171c",
+      base1: "#20232b",
       text: "#FAFAFF",
       overlay1: "#59577F",
       overlay2: "#D2BCF3",

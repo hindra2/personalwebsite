@@ -1,6 +1,6 @@
 import React from "react";
 
-import ProjectGrid from "../components/project/project-card";
+import ProjectGrid from "../components/project/project-grid";
 
 const Projects: React.FC = () => {
     return (

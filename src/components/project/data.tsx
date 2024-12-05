@@ -84,20 +84,16 @@ const projects = [
     imageUrl: "/project/permias/permias-cover.png",
     size: "wide",
     content: (
-      <div className="space-y-6">
-        <p className="text-gray-400">
-          Facilisis blandit interdum molestie, himenaeos venenatis mus.
+      <div className="space-y-6 grid-2">
+        <p className="text-text">
+          Created a frontend with ReactJS.
         </p>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-white text-xl font-bold mb-4">Digital Wellbeing</h3>
-            <p className="text-gray-400">Track and manage your screen time effectively</p>
-          </div>
-          <div className="bg-gray-800 rounded-lg p-6">
-            <h3 className="text-white text-xl font-bold mb-4">Mindfulness</h3>
-            <p className="text-gray-400">Apps to help you stay present and focused</p>
-          </div>
-        </div>
+        <div className="relative w-full h-[50vh] md:h-[55vh]">
+              <img 
+                src="/project/permias/permias-cover.png"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+            </div>
       </div>
     )
   }
