@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+
+
 const Intro: React.FC = () => {
   return (
     <motion.div className='flex flex-col items-center justify-center'>

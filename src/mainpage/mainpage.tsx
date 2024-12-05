@@ -1,106 +1,131 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef } from 'react';
 import Intro from "../pages/intro";
 import AboutMe from "../pages/aboutme";
 import Projects from "../pages/projects";
 import Skills from "../pages/skills";
-import Contact from "../components/contact";
+import Contact from "../components/mainpage/contact";
+import logo from '../assets/logo.svg';
 
-import logo from '../assets/logo.svg'
-
-
-const MainPage = () => {
-  const [activeSection, setActiveSection] = useState("intro");
-  const [showNav, setShowNav] = useState(false);
+const ScrollPage = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeout = useRef<number | null>(null);
+  const sections = [
+    { id: 'intro', Component: Intro },
+    { id: 'about', Component: AboutMe },
+    { id: 'skills', Component: Skills },
+    { id: 'projects', Component: Projects }
+  ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const introSection = document.getElementById('intro');
-      const introHeight = introSection?.offsetHeight || 0;
+    const handleWheel = (e: WheelEvent) => {
+      if (isScrolling) return;
       
-      setShowNav(window.scrollY > introHeight * 0.7);
-      
-      const sections = document.querySelectorAll('section');
-      const scrollPosition = window.scrollY + 100;
-      
-      sections.forEach((section) => {
-        if (
-          section.offsetTop <= scrollPosition &&
-          section.offsetTop + section.offsetHeight > scrollPosition
-        ) {
-          setActiveSection(section.id);
-        }
-      });
+      setIsScrolling(true);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      if (e.deltaY > 0 && activeIndex < sections.length - 1) {
+        // Scrolling down
+        setActiveIndex(prev => prev + 1);
+      } else if (e.deltaY < 0 && activeIndex > 0) {
+        // Scrolling up
+        setActiveIndex(prev => prev - 1);
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 1000);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [isScrolling, activeIndex, sections.length]);
 
-  const scroll = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      setActiveSection(id);
-    }
+  const navigate = (index: number) => {
+    setActiveIndex(index);
   };
 
   return (
-    <div className="relative min-h-screen text-text bg-background overflow-x-hidden overflow-y-hidden">
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}>
+    <div className="relative h-screen overflow-hidden bg-background text-text">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50">
         <div className="flex justify-center items-center p-4">
           <div className="flex bg-overlay1/40 backdrop-blur-sm rounded-full items-center justify-center px-5 py-1">
-            <button className="mr-5 text-xl font-bold" onClick={() => scroll("intro")}>
-              <img src={logo} alt="Logo" width={40}/> 
-            </button>
             <div className="flex gap-4">
-              {[
-                { id: 'about', label: 'About' },
-                { id: 'skills', label: 'Skills' },
-                { id: 'projects', label: 'Projects' }
-              ].map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => scroll(section.id)}
-                  className={`px-5 py-2 rounded-full transition-all duration-300 ${
-                    activeSection === section.id ? 'bg-overlay1' : 'hover:bg-overlay1/50'
-                  }`}
-                >
-                  {section.label}
-                </button>
-              ))}
+              <button
+                onClick={() => navigate(0)}
+                className={`px-5 py-2 rounded-full transition-all duration-300`}
+              >
+                <img src={logo} alt="Logo" width={40}/>  
+              </button>
+              <button
+                onClick={() => navigate(1)}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
+                  activeIndex === 1 ? 'bg-overlay1 text-xl' : 'hover:bg-overlay1/50'
+                }`}
+              >
+                About Me
+              </button>
+              <button
+                onClick={() => navigate(2)}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
+                  activeIndex === 2 ? 'bg-overlay1 text-xl'  : 'hover:bg-overlay1/50'
+                }`}
+              >
+                Skills
+              </button>
+              <button
+                onClick={() => navigate(3)}
+                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold ${
+                  activeIndex === 3 ? 'bg-overlay1 text-xl' : 'hover:bg-overlay1/50'
+                }`}
+              >
+                Projects
+              </button>
             </div>
           </div>
         </div>
       </nav>
 
-      <section id="intro" className="h-screen flex flex-col justify-center items-center">
-        <Intro />
-      </section>
+      {/* Sections container */}
+      <div className="relative h-full">
+        {sections.map((section, index) => (
+          <div
+            key={section.id}
+            className="absolute w-full h-full transition-all duration-1000 ease-in-out"
+            style={{
+              transform: `translateY(${(index - activeIndex) * 100}%)`,
+              opacity: index === activeIndex ? 1 : 0.3,
+            }}
+          >
+            <section className="h-full flex items-center justify-center">
+              <section.Component />
+            </section>
+          </div>
+        ))}
+      </div>
 
-      <section id="about">
-        <AboutMe />
-      </section>
-      <section id="skills">
-        <Skills />
-      </section>
-      <section id="projects">
-        <Projects />
-      </section>
-
-      <div className={`fixed bottom-8 right-8 transition-all duration-500 ${
-        showNav ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}>
+      {/* Contact button */}
+      <div className="fixed bottom-8 right-8">
         <Contact />
+      </div>
+
+      {/* Side navigation dots */}
+      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
+        {sections.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => navigate(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              activeIndex === index ? 'bg-overlay1 scale-150' : 'bg-overlay1/50 hover:bg-overlay1'
+            }`}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
-export default MainPage;
+export default ScrollPage;
