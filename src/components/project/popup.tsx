@@ -32,12 +32,12 @@ const Popup = ({ project, onClose }) => {
 
         <div className="relative bg-background min-h-[50vh]">
           <div className="max-w-4xl mx-auto px-8 py-12">
-            <div className="text-sm text-gray-400 uppercase tracking-wider mb-2">
-              {project.category}
-            </div>
             <h2 className="text-4xl font-bold text-text mb-8">
               {project.title}
             </h2>
+            <div className="text-sm text-gray-400 uppercase tracking-wider mb-2">
+              {project.desc}
+            </div>
             <div className="text-text space-y-6">
               {project.content}
             </div>

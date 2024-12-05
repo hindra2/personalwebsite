@@ -2,7 +2,7 @@ const projects = [
   {
     id: 1,
     title: "Tulip Estate",
-    category: "UIUC",
+    desc: "Bringing a stock market like perspective to investing in real estate",
     imageUrl: "/project/tulip/tulip-cover.png",
     size: "wide",
     content: (
@@ -34,7 +34,7 @@ const projects = [
   {
     id: 2,
     title: "Akar",
-    category: "",
+    desc: "A knowledge management platform that combines flashcards with the effectiveness of the pomodoro timer",
     imageUrl: "/project/akar/akar-cover2.png",
     size: "default",
     content: (
@@ -56,7 +56,7 @@ const projects = [
   {
     id: 3,
     title: "Explorify",
-    category: "",
+    desc: "A place to host, find and join events around campus",
     imageUrl: "/1",
     size: "default",
     content: (
@@ -80,7 +80,7 @@ const projects = [
   {
     id: 4,
     title: "Permias Website",
-    category: "HOLIDAYS",
+    desc: "Website for the Indonesian community in UIUC",
     imageUrl: "/project/permias/permias-cover.png",
     size: "wide",
     content: (
