@@ -28,7 +28,7 @@ const Card = ({ project, onExpand }) => {
         <motion.h2 className="text-2xl font-bold">
           {project.title}
         </motion.h2>
-        <motion.span className="text-sm uppercase tracking-wider mb-2 inline-block">
+        <motion.span className="text-xs font-bold tracking-wider mb-2 inline-block">
           {project.desc}
         </motion.span>
       </div>

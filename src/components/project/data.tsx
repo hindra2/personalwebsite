@@ -1,7 +1,7 @@
 const projects = [
   {
     id: 1,
-    title: "Tulip Estate",
+    title: "tulip.",
     desc: "Bringing a stock market like perspective to investing in real estate",
     imageUrl: "/project/tulip/tulip-cover.png",
     size: "wide",
@@ -33,8 +33,8 @@ const projects = [
   },
   {
     id: 2,
-    title: "Akar",
-    desc: "A knowledge management platform that combines flashcards with the effectiveness of the pomodoro timer",
+    title: "akar",
+    desc: "A knowledge management platform",
     imageUrl: "/project/akar/akar-cover2.png",
     size: "default",
     content: (
