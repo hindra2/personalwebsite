@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import Intro from "../pages/intro";
-import AboutMe from "../pages/aboutme";
-import Projects from "../pages/projects";
-import Skills from "../pages/skills";
-import Contact from "../components/mainpage/contact";
+import Intro from "@/pages/intro";
+import AboutMe from "@/pages/aboutme";
+import Projects from "@/pages/projects";
+import Skills from "@/pages/skills";
+import Contact from "@/components/mainpage/contact";
 
 const ScrollPage = () => {
   const [activeIndex, setActiveIndex] = useState(0);
