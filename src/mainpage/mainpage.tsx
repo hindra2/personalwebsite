@@ -49,7 +49,7 @@ const ScrollPage = () => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50">
         <div className="flex justify-center items-center p-4">
-          <div className="flex bg-overlay1/40 backdrop-blur-sm rounded-full items-center justify-center px-5 py-1">
+          <div className="flex bg-overlay1/40 backdrop-blur-lg rounded-full items-center justify-center px-5 py-1">
             <div className="flex gap-4">
               <button
                 onClick={() => navigate(0)}

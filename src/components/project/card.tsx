@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 const Card = ({ project, onExpand }) => {
   const sizeClasses = {
-    default: "col-span-2 row-span-1 h-64",
-    wide: "col-span-3 row-span-1 h-64",
+    default: "col-span-2 row-span-1 h-80",
+    wide: "col-span-3 row-span-1 h-80",
     tall: "col-span-1 row-span-2 h-full min-h-[32rem]",
     large: "col-span-2 row-span-2 h-full min-h-[32rem]"
   };
@@ -16,7 +16,7 @@ const Card = ({ project, onExpand }) => {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="relative w-full h-[50vh] md:h-[60vh]">
+      <div className="relative w-full h-[50vh] md:h-[80vh]">
         <img 
           src={project.imageUrl}
           alt={project.title}

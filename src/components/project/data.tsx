@@ -1,9 +1,9 @@
 const projects = [
   {
     id: 1,
-    title: "Permias Webiste",
+    title: "Tulip Estate",
     category: "UIUC",
-    imageUrl: "/project/permias-cover.png",
+    imageUrl: "/project/tulip/tulip-cover.png",
     size: "wide",
     content: (
       <div className="space-y-6 bg-background text-text">
@@ -33,9 +33,9 @@ const projects = [
   },
   {
     id: 2,
-    title: "Arrange Your Apple Devices for the Gram",
-    category: "HOW TO",
-    imageUrl: "/api/placeholder/400/400",
+    title: "Akar",
+    category: "",
+    imageUrl: "/project/akar/akar-cover2.png",
     size: "default",
     content: (
       <div className="space-y-6">
@@ -55,9 +55,9 @@ const projects = [
   },
   {
     id: 3,
-    title: "Map Apps for the Superior Mode of Transport",
-    category: "PEDAL POWER",
-    imageUrl: "/api/placeholder/400/400",
+    title: "Explorify",
+    category: "",
+    imageUrl: "/1",
     size: "default",
     content: (
       <div className="space-y-6">
@@ -79,9 +79,9 @@ const projects = [
   },
   {
     id: 4,
-    title: "Our Pick of Apps to Help You Escape From Apps",
+    title: "Permias Website",
     category: "HOLIDAYS",
-    imageUrl: "/api/placeholder/800/400",
+    imageUrl: "/project/permias/permias-cover.png",
     size: "wide",
     content: (
       <div className="space-y-6">
