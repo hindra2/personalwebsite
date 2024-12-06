@@ -1,9 +1,25 @@
 import { motion } from 'framer-motion';
+import React from 'react';
 
-const Card = ({ project, onExpand }) => {
+type ProjectSize = 'default' | 'wide' | 'tall' | 'large';
+
+interface Project {
+  id: number;
+  imageUrl: string;
+  size: ProjectSize;
+  title: string;
+  desc: string;
+}
+
+interface CardProps {
+  project: Project;
+  onExpand: () => void;
+}
+
+const Card: React.FC<CardProps> = ({ project, onExpand }) => {
   const sizeClasses = {
     default: "col-span-2 row-span-1 h-80",
-    wide: "col-span-3 row-span-1 h-80",
+    wide: "col-span-3 row-span-1 h-80", 
     tall: "col-span-1 row-span-2 h-full min-h-[32rem]",
     large: "col-span-2 row-span-2 h-full min-h-[32rem]"
   };

@@ -6,27 +6,9 @@ const projects = [
     imageUrl: "/project/tulip/tulip-cover.png",
     size: "wide",
     content: (
-      <div className="space-y-6 bg-background text-text">
+      <div className="space-y-6 text-text">
         <p>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ipsum in mattis 
-          sociosqu imperdiet ante condimentum nam.
-        </p>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-xl font-bold mb-4">Top Food Delivery Apps</h3>
-          <ul className="space-y-4 text-gray-400">
-            <li className="flex items-center">
-              <span className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">1</span>
-              <span>UberEats - Best Overall Selection</span>
-            </li>
-            <li className="flex items-center">
-              <span className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-4">2</span>
-              <span>DoorDash - Fastest Delivery Times</span>
-            </li>
-          </ul>
-        </div>
-        <p className="text-gray-400">
-          Commodo pharetra aliquam augue, lectus fames finibus. Habitasse 
-          pellentesque sociosqu varius pretium porta.
+          Work in progress
         </p>
       </div>
     )
@@ -38,18 +20,10 @@ const projects = [
     imageUrl: "/project/akar/akar-cover2.png",
     size: "default",
     content: (
-      <div className="space-y-6">
-        <p className="text-gray-400">
-          Pharetra integer velit scelerisque placerat molestie conubia.
+      <div className="space-y-6 text-text">
+        <p className="">
+          Work in progress
         </p>
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-white text-xl font-bold mb-4">Essential Tips</h3>
-          <div className="space-y-3 text-gray-400">
-            <p>• Consider the Rule of Thirds</p>
-            <p>• Mind your lighting setup</p>
-            <p>• Keep cables organized</p>
-          </div>
-        </div>
       </div>
     )
   },
@@ -61,19 +35,9 @@ const projects = [
     size: "default",
     content: (
       <div className="space-y-6">
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h3 className="text-white text-xl font-bold mb-4">Featured Apps</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-gray-700 rounded-lg">
-              <h4 className="text-white font-bold mb-2">Strava</h4>
-              <p className="text-gray-400">Track your rides and join challenges</p>
-            </div>
-            <div className="p-4 bg-gray-700 rounded-lg">
-              <h4 className="text-white font-bold mb-2">Komoot</h4>
-              <p className="text-gray-400">Plan your routes effectively</p>
-            </div>
-          </div>
-        </div>
+        <p>
+          Work in progress
+        </p>
       </div>
     )
   },
@@ -89,11 +53,11 @@ const projects = [
           Created a frontend with ReactJS.
         </p>
         <div className="relative w-full h-[50vh] md:h-[55vh]">
-              <img 
-                src="/project/permias/permias-cover.png"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-              />
-            </div>
+          <img 
+            src="/project/permias/permias-cover.png"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+        </div>
       </div>
     )
   }
