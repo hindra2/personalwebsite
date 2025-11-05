@@ -16,19 +16,15 @@ export default {
         semibold: "600",
         bold: "700",
       },
+      colors: {
+        background: "#15171c",
+        base1: "#20232b",
+        text: "#FAFAFF",
+        overlay1: "#59577F",
+        overlay2: "#D2BCF3",
+        overlay3: "#273469"
+      }
     },
-    colors: {
-      transparent: 'transparent',
-      black: "#000000",
-      white: "#FFFFFF",
-      background: "#15171c",
-      base1: "#20232b",
-      text: "#FAFAFF",
-      overlay1: "#59577F",
-      overlay2: "#D2BCF3",
-      overlay3: "#273469"
-    }
   },
   plugins: [],
 }
-

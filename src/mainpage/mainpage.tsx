@@ -1,117 +1,133 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from "react";
 
-import Intro from "@/pages/intro";
-import AboutMe from "@/pages/aboutme";
-import Projects from "@/pages/projects";
-import Skills from "@/pages/skills";
-import Contact from "@/components/mainpage/contact";
+import { Contact } from "../components/contacts";
+import { Card } from "../components/card";
+import { SectionButton } from "../components/section-button";
 
-const ScrollPage = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-  const sections = [
-    { id: 'intro', Component: Intro },
-    { id: 'about', Component: AboutMe },
-    { id: 'skills', Component: Skills },
-    { id: 'projects', Component: Projects }
-  ];
+const MainPage = () => {
+  const [activeSection, setActiveSection] = useState<string>("about");
+
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const scrollViewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (isScrolling) return;
-      
-      setIsScrolling(true);
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
+    const sections = [
+      { id: "about", ref: aboutRef },
+      { id: "experience", ref: experienceRef },
+      { id: "projects", ref: projectsRef },
+    ];
 
-      if (e.deltaY > 0 && activeIndex < sections.length - 1) {
-        setActiveIndex(prev => prev + 1);
-      } else if (e.deltaY < 0 && activeIndex > 0) {
-        setActiveIndex(prev => prev - 1);
-      }
-
-      scrollTimeout.current = setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000);
+    const options = {
+      root: scrollViewRef.current,
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: true });
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, [isScrolling, activeIndex, sections.length]);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, options);
 
-  const navigate = (index: number) => {
-    setActiveIndex(index);
+    sections.forEach((section) => {
+      if (section.ref.current) {
+        observer.observe(section.ref.current);
+      }
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section.ref.current) observer.unobserve(section.ref.current);
+      });
+    };
+  }, []);
+
+  const scrollToSection = (
+    id: string,
+    ref: React.RefObject<HTMLDivElement>
+  ) => {
+    setActiveSection(id);
+    ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="relative h-screen overflow-hidden bg-background text-text">
-      <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="flex justify-center items-center p-4">
-          <div className="flex bg-overlay1/40 backdrop-blur-lg rounded-full items-center justify-center px-5 py-1 border border-overlay1">
-            <div className="flex gap-4">
-              <button onClick={() => navigate(0)}>
-                <img src={"/favicon.svg"} alt="Logo" width={40}/>  
-              </button>
-              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 1 ? 'bg-overlay1 text-xl' : ''}`}
-                onClick={() => navigate(1)}
-              >
-                About Me
-              </motion.button>
-              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 2 ? 'bg-overlay1 text-xl' : ''}`}
-                onClick={() => navigate(2)}
-              >
-                Skills
-              </motion.button>
-              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.7 }}
-                className={`px-5 py-2 rounded-full transition-all duration-300 font-bold hover:bg-overlay1/50 ${activeIndex === 3 ? 'bg-overlay1 text-xl' : ''}`}
-                onClick={() => navigate(3)}
-              >
-                Projects
-              </motion.button>
-            </div>
+    <div className="relative h-screen text-text flex bg-gradient-to-br from-base1 to-background overflow-hidden">
+      {/* Left section */}
+      <div className="w-full h-full ps-[10rem] py-[5rem] flex flex-col space-y-10 justify-between">
+        <div className="flex flex-col">
+          <span className="text-7xl font-bold">Harold Indra</span>
+          <span className="text-3xl">Software Engineer</span>
+          <span>CS + Advertising @ UIUC</span>
+
+          {/* Sections */}
+          <div className="flex flex-col text-sm mt-5 spacce-y-3 gap-2">
+            <SectionButton
+              title="about me"
+              isActive={activeSection == "about"}
+              onClick={() => scrollToSection("about", aboutRef)}
+            />
+            <SectionButton
+              title="experience"
+              isActive={activeSection == "experience"}
+              onClick={() => scrollToSection("experience", experienceRef)}
+            />
+            <SectionButton
+              title="projects"
+              isActive={activeSection == "projects"}
+              onClick={() => scrollToSection("projects", projectsRef)}
+            />
           </div>
         </div>
-      </nav>
 
-      <div className="relative h-full">
-        {sections.map((section, index) => (
-          <div
-            key={section.id}
-            className="absolute w-full h-full transition-all duration-1000 ease-in-out"
-            style={{
-              transform: `translateY(${(index - activeIndex) * 100}%)`,
-              opacity: index === activeIndex ? 1 : 0.3,
-            }}
-          >
-            <section className="h-full flex items-center justify-center">
-              <section.Component />
-            </section>
-          </div>
-        ))}
+        {/* Footer */}
+        <div>
+          <Contact />
+        </div>
       </div>
 
-      <div className="fixed bottom-8 right-8">
-        <Contact />
-      </div>
+      {/* Right Section */}
+      <div className="w-full align-bottom py-[5rem] pr-[10rem] overflow-y-scroll">
+        <div className="py-[2rem]" id="about" ref={aboutRef}>
+          <span>
+            I'm a developer from Jakarta, Indonesia with an interest in full
+            stack software development, mobile development.
+          </span>
+        </div>
 
-      <div className="fixed right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
-        {sections.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => navigate(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              activeIndex === index ? 'bg-overlay1 scale-150' : 'bg-overlay1/50 hover:bg-overlay1'
-            }`}
-          />
-        ))}
+        <div
+          className="flex flex-col py-[2rem] space-y-2 gap-3"
+          id="experience"
+          ref={experienceRef}
+        >
+          <span>Experience</span>
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+        </div>
+
+        <div
+          className="flex flex-col py-[2rem] space-y-2 gap-3"
+          id="projects"
+          ref={projectsRef}
+        >
+          <span>Projects</span>
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+          <Card title="Test" content="Test2" />
+        </div>
       </div>
     </div>
   );
 };
 
-export default ScrollPage;
+export default MainPage;
