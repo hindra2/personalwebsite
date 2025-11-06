@@ -3,26 +3,13 @@
 @plugin 'tailwind-scrollbar';
 
 @theme {
-  --color-background: #15171c;
-  --color-background2: #2a2633;
-  --color-base1: #20232b;
-  --color-text: #fafaff;
-  --color-overlay1: #59577f;
-  --color-overlay2: #d2bcf3;
-  --color-overlay3: #273469;
-}
-
-/* add the code bellow */
-@layer utilities {
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+  --color-background: oklch(0.2047 0.0104 268.17);
+  --color-background2: oklch(0.2786 0.0242 298.91);
+  --color-base1: oklch(0.2566 0.0157 269.06);
+  --color-text: oklch(0.9865 0.0066 286.28);
+  --color-overlay1: oklch(0.4754 0.064 285.98);
+  --color-overlay2: oklch(0.8319 0.0792 302.97);
+  --color-overlay3: oklch(0.344 0.0936 270.46);
 }
 
 * {
