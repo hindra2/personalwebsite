@@ -110,7 +110,7 @@ const MainPage = () => {
             About Me
           </p>
           <span>I'm a developer from</span>
-          <span className="font-bold hover:text-red hover:cursor-[url(assets/flag.png),pointer]">
+          <span className="font-bold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
             {" "}
             Jakarta, Indonesia
           </span>
@@ -138,11 +138,11 @@ const MainPage = () => {
           <br />
 
           <span>Outside of coding, you'll find me </span>
-          <span className="font-bold hover:text-red hover:cursor-[url(assets/cube.png),pointer]">
+          <span className="font-bold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
             speedcubing
           </span>
           <span> or trying to optimize a </span>
-          <span className="font-bold group hover:cursor-[url(assets/dart.png),pointer]">
+          <span className="font-bold group hover:cursor-[url(/assets/dart.png),default]">
             <span className="group-hover:text-blue">Bloons</span>
             <span className="group-hover:text-peach"> TD 6</span>
           </span>

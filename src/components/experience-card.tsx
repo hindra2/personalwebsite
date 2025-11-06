@@ -30,7 +30,7 @@ export const ExperienceCard = ({
   return (
     <>
       <button
-        className="md:flex rounded-lg p-2 text-left border border-transparent hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg transition-all duration-300"
+        className="md:flex rounded-lg p-2 text-left border border-transparent hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg hover:cursor-pointer transition-all duration-300"
         ref={cardRef}
         onClick={handleOpen}
       >
