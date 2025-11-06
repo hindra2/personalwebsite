@@ -93,30 +93,60 @@ const MainPage = () => {
 
         {/* Footer */}
         <div>
+          <div className="flex gap-1.5 text-[0.6rem] mb-3 text-text/50">
+            <span>Website colors adapted from </span>
+            <a href="https://catppuccin.com/palette/" className="underline">
+              Catppuccin
+            </a>
+          </div>
           <Contact />
         </div>
       </div>
 
       {/* Right Section */}
-      <div className="w-full align-bottom md:py-20 md:pr-40 py-5 px-4">
-        <div className="py-8 text-justify" id="about" ref={aboutRef}>
+      <div className="w-full align-bottom md:py-20 md:pr-40 py-5 px-5">
+        <div className="py-8 text-justify font-thin" id="about" ref={aboutRef}>
           <p className="md:hidden font-bold mb-1 text-xl text-overlay2">
             About Me
           </p>
-          <span>
-            I'm a developer from Jakarta, Indonesia with a drive to create
-            software that solves problems. My passion for development started
-            with my love for probelm solving.
+          <span>I'm a developer from</span>
+          <span className="font-bold hover:text-red hover:cursor-[url(assets/flag.png),pointer]">
+            {" "}
+            Jakarta, Indonesia
           </span>
+          <span>
+            , driven by coffee and a desire to create software that solves real
+            problems and make a genuine impact. My passion for development
+            started with a love for puzzles, and over time, it's grown into a
+            fascination with the intersection of technology and design.
+          </span>
+
           <br />
           <br />
-          <span>
-            My hobbies include speedcubing, playing games and ...My hobbies
-            include speedcubing, playing games and ...My hobbies include
-            speedcubing, playing games and ...My hobbies include speedcubing,
-            playing games and ...My hobbies include speedcubing, playing games
-            and ...My hobbies include speedcubing, playing games and ...
+
+          <>
+            <span>
+              I'm currently looking for opportunities in software engineering or
+              full-stack development positions, where I can build things that
+              not only work beautifully, but
+            </span>
+            <span className="italic"> feel</span>
+            <span> right to use.</span>
+          </>
+
+          <br />
+          <br />
+
+          <span>Outside of coding, you'll find me </span>
+          <span className="font-bold hover:text-red hover:cursor-[url(assets/cube.png),pointer]">
+            speedcubing
           </span>
+          <span> or trying to optimize a </span>
+          <span className="font-bold group hover:cursor-[url(assets/dart.png),pointer]">
+            <span className="group-hover:text-blue">Bloons</span>
+            <span className="group-hover:text-peach"> TD 6</span>
+          </span>
+          <span> run.</span>
         </div>
 
         <div

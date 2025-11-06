@@ -1,17 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
 @plugin 'tailwind-scrollbar';
 
 @theme {
-  --color-background: oklch(0.2047 0.0104 268.17);
+  --color-background: oklch(0.1828 0.0204 284.2);
   --color-background2: oklch(0.2786 0.0242 298.91);
-  --color-base1: oklch(0.2566 0.0157 269.06);
-  --color-text: oklch(0.9865 0.0066 286.28);
+  --color-base1: oklch(0.2429 0.0304 283.91);
+  --color-text: oklch(0.8787 0.0426 272.28);
   --color-overlay1: oklch(0.4754 0.064 285.98);
-  --color-overlay2: oklch(0.8319 0.0792 302.97);
-  --color-overlay3: oklch(0.344 0.0936 270.46);
+  --color-overlay2: oklch(0.7871 0.1187 304.77);
+  --color-overlay3: oklch(0.7821 0.0903 8.85);
+  --color-red: oklch(0.7556 0.1297 2.76);
+  --color-blue: oklch(0.7664 0.1113 259.88);
+  --color-peach: oklch(0.8237 0.1015 52.63);
 }
 
 * {
-  font-family: "Nunito", sans-serif;
+  /* font-family: "Nunito", sans-serif; */
+  font-family: "JetBrains Mono", monospace;
 }
