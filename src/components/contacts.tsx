@@ -39,7 +39,7 @@ export const Contact = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         className="text-text hover:text-overlay2"
-        onClick={() => window.open("")}
+        onClick={() => window.open("/resume.pdf")}
       >
         <FileUser size={32} />
       </motion.button>
