@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Contact } from "@/components/contacts";
-import { ExperienceCard } from "@/components/experience-card";
-import { SectionButton } from "@/components/section-button";
+import { Contact } from "@/components/contacts.tsx";
+import { ExperienceCard } from "@/components/experience-card.tsx";
+import { SectionButton } from "@/components/section-button.tsx";
 
-import { TemasModal } from "@/components/modals/temas-modal";
+import { TemasModal } from "@/components/modals/temas-modal.tsx";
 
 const MainPage = () => {
   const [activeSection, setActiveSection] = useState<string>("about");
