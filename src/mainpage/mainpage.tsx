@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Contact } from "@/components/contacts";
+import { ExperienceCard } from "@/components/experience-card";
 import { ProjectCard } from "@/components/project-card";
 import { SectionButton } from "@/components/section-button";
 
@@ -97,8 +98,11 @@ const MainPage = () => {
         <div>
           <div className="flex gap-1.5 text-[0.6rem] mb-3 text-text/50">
             <span>Website colors adapted from </span>
-            <a href="https://catppuccin.com/palette/" className="underline">
-              Catppuccin
+            <a
+              href="https://github.com/nickberckley/kabadoni"
+              className="underline"
+            >
+              Kabadoni
             </a>
           </div>
           <Contact />
@@ -107,12 +111,12 @@ const MainPage = () => {
 
       {/* Right Section */}
       <div className="w-full align-bottom md:py-20 md:pr-40 py-5 px-5">
-        <div className="py-8 text-justify font-thin" id="about" ref={aboutRef}>
-          <p className="md:hidden font-bold mb-1 text-xl text-overlay2">
+        <div className="py-8 text-justify font" id="about" ref={aboutRef}>
+          <p className="md:hidden font-extrabold mb-1 text-xl text-overlay2">
             About Me
           </p>
           <span>I'm a developer from</span>
-          <span className="font-bold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
+          <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
             {" "}
             Jakarta, Indonesia
           </span>
@@ -140,11 +144,11 @@ const MainPage = () => {
           <br />
 
           <span>Outside of coding, you'll find me </span>
-          <span className="font-bold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
+          <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
             speedcubing
           </span>
           <span> or trying to optimize a </span>
-          <span className="font-bold group hover:cursor-[url(/assets/dart.png),default]">
+          <span className="font-extrabold group hover:cursor-[url(/assets/dart.png),default]">
             <span className="group-hover:text-blue">Bloons</span>
             <span className="group-hover:text-peach"> TD 6</span>
           </span>
@@ -156,16 +160,24 @@ const MainPage = () => {
           id="experience"
           ref={experienceRef}
         >
-          <p className="font-bold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
+          <p className="font-extrabold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
             Experience
           </p>
-          <ProjectCard
+          <ExperienceCard
             title="Software Development Intern @ Temas TBK"
             desc="Worked with a team to maintain old React codebases used for creating work and trucking orders by migrating and refactoring to LTS versions of outdated libraries, while also helping rewrite and refactor parts of a NodeJS backend of an internal tool for making work requests to Golang."
             date="May - August 2025"
             location="Jakarta, Indonesia"
-            content={<TemasModal />}
+            link="https://temas.id/en"
             skills={["ReactJS", "NodeJS", "TypeScript", "Golang"]}
+          />
+          <ExperienceCard
+            title="Software Engineer @ Tulip"
+            desc="Developed a frontend for a mobile application with React Native for an app that helps bring a stock market like perspective to real estate, while implementing and deploying a backend on AWS with flask for a price making on the beta website."
+            date="June 2024 - August 2025"
+            location="Urbana, Illinois"
+            link="https://tulip.markets"
+            skills={["React Native", "AWS", "Flask", "Typescript", "Python"]}
           />
         </div>
 
@@ -174,17 +186,9 @@ const MainPage = () => {
           id="projects"
           ref={projectsRef}
         >
-          <p className="font-bold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
+          <p className="font-extrabold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
             Projects
           </p>
-          <ProjectCard
-            title="Tulip"
-            desc="Developed a frontend for a mobile application with React Native for an app that helps bring a stock market like perspective to real estate, while implementing and deploying a backend on AWS with flask for an algorithm to calculate price changes."
-            date="June 2024 - August 2025"
-            location="Urbana, Illinois"
-            content={<TulipModal />}
-            skills={["React Native", "AWS", "Flask", "Typescript", "Python"]}
-          />
           <ProjectCard
             title="Explorifyy"
             desc="Created a fullstack application using React Native and Supabase for an app to host events and share them in a feedlike application structure, filtered by location and interest categories."

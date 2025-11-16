@@ -29,7 +29,7 @@ export const Modal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="fixed inset-0 bg-base z-40"
+            className="fixed inset-0 bg-background/85 z-40"
           />
 
           {/* Modal */}

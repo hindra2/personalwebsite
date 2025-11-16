@@ -4,17 +4,16 @@
 @plugin 'tailwind-scrollbar';
 
 @theme {
-  --color-background: oklch(0.1828 0.0204 284.2);
-  --color-background2: oklch(0.2786 0.0242 298.91);
-  --color-base1: oklch(0.2429 0.0304 283.91);
-  --color-surface0: oklch(0.324 0.0319 281.98);
-  --color-text: oklch(0.8787 0.0426 272.28);
-  --color-overlay1: oklch(0.4754 0.064 285.98);
-  --color-overlay2: oklch(0.7871 0.1187 304.77);
-  --color-overlay3: oklch(0.7821 0.0903 8.85);
-  --color-red: oklch(0.7556 0.1297 2.76);
-  --color-blue: oklch(0.7664 0.1113 259.88);
-  --color-peach: oklch(0.8237 0.1015 52.63);
+  --color-background: #ebe0d8;
+  --color-background2: #ebe0d8;
+  --color-base1: #e3d6cc;
+  --color-surface0: #d2c6bc;
+  --color-overlay1: #b9aea5;
+  --color-overlay2: #252526;
+  --color-text: #1e1e1e;
+  --color-red: #a2575a;
+  --color-blue: #586f86;
+  --color-peach: #a87a4f;
 }
 
 * {
