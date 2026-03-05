@@ -1,19 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 
-export const ExplorifyModal = () => {
-  const technologies = [
-    "React Native",
-    "Supabase",
-    "TailwindCSS",
-    "Typescript",
-    "PSQL",
-  ];
+export const PermiasWebsiteModal = () => {
+  const technologies = ["ReactJS", "Typescript", "TailwindCSS"];
   return (
     <div className="flex flex-col px-5">
       <div className="flex items-center">
         <span className="flex md:text-2xl text-xl md:text-text text-overlay2">
-          Explorifyy
+          Permias Website
         </span>
         <motion.button
           className="hover:cursor-pointer"
@@ -26,9 +20,7 @@ export const ExplorifyModal = () => {
             duration: 0.2,
             ease: "easeOut",
           }}
-          onClick={() =>
-            window.open("https://apps.apple.com/us/app/explorifyy/id6739402841")
-          }
+          onClick={() => window.open("https://permiasuiuc.org/")}
         >
           <ArrowUpRight className="ml-1" />
         </motion.button>
@@ -38,36 +30,36 @@ export const ExplorifyModal = () => {
         <div className="flex flex-col">
           <span className="text-overlay2">About</span>
           <span className="">
-            Explorifyy is a mobile application that aggregates events to help
-            students find things to do in campus. The idea came from when me and
-            my friends missed out on a lot of interesting events in our freshmen
-            year, so I wanted to build something that would help with the
-            awareness of events happening around campus.
+            Permias is the Indonesian student community in universities in the
+            US. This website was made for the branch in UIUC, with the goal of
+            helping students find more information about the organization before
+            coming to the US, as this was something I didn't have as a freshman.
+            It's a pretty simple static site that does it's job well.
           </span>
         </div>
 
         <div className="flex flex-col mt-3">
           <span className="text-overlay2">Images</span>
           <span className="">
-            <img src="/assets/projects/explorify.png"></img>
+            <img src="/assets/projects/permiaswebsite.png"></img>
           </span>
         </div>
 
-        <div className="flex flex-col mt-3">
+        {/* <div className="flex flex-col mt-3">
           <span className="text-overlay2">Features</span>
           <span className="">
             <ul className="list-disc ml-5">
-              <li>Explore events</li>
+              <li>Merch Selling</li>
               <li>RSVP and save system</li>
               <li>Sharing events with a deep link</li>
             </ul>
           </span>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col mt-3">
+        {/* <div className="flex flex-col mt-3">
           <span className="text-overlay2">What I did</span>
           <span className="font-thin"></span>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col mt-3">
         <span className="text-overlay2">Technologies Used</span>

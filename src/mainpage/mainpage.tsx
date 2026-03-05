@@ -5,9 +5,8 @@ import { ExperienceCard } from "@/components/experience-card";
 import { ProjectCard } from "@/components/project-card";
 import { SectionButton } from "@/components/section-button";
 
-import { TemasModal } from "@/components/modals/temas-modal";
-import { TulipModal } from "@/components/modals/tulip-modal";
 import { ExplorifyModal } from "@/components/modals/explorify-modal";
+import { PermiasWebsiteModal } from "@/components/modals/permiaswebsite-modal";
 
 const MainPage = () => {
   const [activeSection, setActiveSection] = useState<string>("about");
@@ -34,7 +33,7 @@ const MainPage = () => {
 
     const observer = new IntersectionObserver(
       observerCallback,
-      observerOptions
+      observerOptions,
     );
 
     // Observe all sections
@@ -56,7 +55,7 @@ const MainPage = () => {
 
   const scrollToSection = (
     id: string,
-    ref: React.RefObject<HTMLDivElement>
+    ref: React.RefObject<HTMLDivElement>,
   ) => {
     setActiveSection(id);
     ref.current?.scrollIntoView({ behavior: "smooth" });
@@ -216,15 +215,14 @@ const MainPage = () => {
               "Typescript",
               "PSQL",
             ]}
-            link="https://akar.study"
           />
           <ProjectCard
             title="Permias Website"
             desc="Created a website to promote the Indonesian Student Association (PERMIAS) at UIUC with ReactJS, showcasing events and information about the school to help new students get acclimated."
             date="March - April 2024"
             location="Urbana, Illinois"
+            content={<PermiasWebsiteModal />}
             skills={["ReactJS", "Typescript", "TailwindCSS"]}
-            link="https://permiasuiuc.org/"
           />
           <ProjectCard
             title="Talenta"

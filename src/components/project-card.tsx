@@ -13,7 +13,7 @@ export const ProjectCard = ({
   desc: string;
   date: string;
   location: string;
-  content: React.ReactNode;
+  content?: React.ReactNode;
   skills: string[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
