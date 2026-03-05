@@ -75,7 +75,7 @@ const MainPage = () => {
           <span className="md:text-base text-sm">CS + Advertising @ UIUC</span>
 
           {/* Sections */}
-          <div className="flex-col text-sm mt-5 spacce-y-3 gap-2 hidden md:flex">
+          <div className="flex-col text-sm mt-5 space-y-3 gap-2 hidden md:flex">
             <SectionButton
               title="about me"
               isActive={activeSection == "about"}

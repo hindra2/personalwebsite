@@ -20,7 +20,9 @@ export const ExplorifyModal = () => {
             duration: 0.2,
             ease: "easeOut",
           }}
-          onClick={() => window.open("https://tulip.markets")}
+          onClick={() =>
+            window.open("https://apps.apple.com/us/app/explorifyy/id6739402841")
+          }
         >
           <ArrowUpRight className="ml-1" />
         </motion.button>
@@ -29,29 +31,29 @@ export const ExplorifyModal = () => {
       <div className="flex flex-col px-3 py-1 border border-overlay1 rounded-lg mt-3">
         <div className="flex flex-col">
           <span className="text-overlay2">About</span>
-          <span className="font-thin">
-            Tulip is a mobile app that helps bring a stock-like market
-            perspective to real estate.
+          <span className="">
+            Explorifyy is a mobile application that aggregates events to help
+            students find things to do in campus. The idea came from when me and
+            my friends missed out on a lot of interesting events in our freshmen
+            year, so I wanted to build something that would help with the
+            awareness of events happening around campus.
           </span>
         </div>
 
         <div className="flex flex-col mt-3">
           <span className="text-overlay2">Images</span>
-          <span className="font-thin">
-            this is where all the images and screenshots go
+          <span className="">
+            <img src="/assets/projects/explorify.png"></img>
           </span>
         </div>
 
         <div className="flex flex-col mt-3">
           <span className="text-overlay2">Features</span>
-          <span className="font-thin">
+          <span className="">
             <ul className="list-disc ml-5">
-              <li></li>
-              <li>Test1</li>
-              <li>Test1</li>
-              <li>Test1</li>
-              <li>Test1</li>
-              <li>Test1</li>
+              <li>Explore events</li>
+              <li>RSVP and save system</li>
+              <li>Sharing events with a deep link</li>
             </ul>
           </span>
         </div>
@@ -69,7 +71,7 @@ export const ExplorifyModal = () => {
               {technologies.map((technology, index) => (
                 <span
                   key={index}
-                  className="px-2 py-1 text-xs text-thin rounded-full bg-overlay1/60 text-text border border-overlay1"
+                  className="px-2 py-1 text-xs rounded-full bg-overlay1/60 text-text border border-overlay1"
                 >
                   {technology}
                 </span>
