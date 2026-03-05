@@ -20,8 +20,10 @@ export const ProjectCard = ({
   const cardRef = useRef<HTMLButtonElement>(null);
   const [cardBounds, setCardBounds] = useState<DOMRect | null>(null);
 
+  const isClickable = !!content;
+
   const handleOpen = () => {
-    if (cardRef.current) {
+    if (isClickable && cardRef.current) {
       setCardBounds(cardRef.current.getBoundingClientRect());
       setIsOpen(true);
     }
@@ -34,7 +36,9 @@ export const ProjectCard = ({
   return (
     <>
       <button
-        className="md:flex rounded-lg p-2 text-left border border-transparent hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg hover:cursor-pointer transition-all duration-300"
+        className={`md:flex rounded-lg p-2 text-left border border-transparent hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg transition-all duration-300
+            ${content ? "hover:cursor-pointer" : "cursor-default"}
+            `}
         ref={cardRef}
         onClick={handleOpen}
       >
@@ -69,12 +73,14 @@ export const ProjectCard = ({
         </div>
       </button>
 
-      <Modal
-        isOpen={isOpen}
-        handleClose={handleClose}
-        cardBounds={cardBounds}
-        content={content}
-      />
+      {isClickable && (
+        <Modal
+          isOpen={isOpen}
+          handleClose={handleClose}
+          cardBounds={cardBounds}
+          content={content}
+        />
+      )}
     </>
   );
 };
