@@ -4,13 +4,6 @@ import type { Project } from "@/components/project-card";
 
 export const projects: Project[] = [
     {
-        title: "GlowingMeerkat frontend",
-        desc: "Created a marketplace for a local business",
-        date: "August 2026 - Present",
-        location: "Jakarta, Indonesia",
-        skills: ["Fullstack", "AI"],
-    },
-    {
         title: "Scheduling Dashboard",
         desc: "Created a private dashboard to automate tracking a comapny's production cycle. A simple project where I developed a more efficient workflow by utilizing AI tools. Used by 1000+ workers and administrator in factories.",
         date: "June 2026 - Present",
