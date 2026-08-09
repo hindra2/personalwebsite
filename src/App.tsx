@@ -1,11 +1,5 @@
-import MainPage from "./mainpage/mainpage";
+import MainPage from "@/mainpage/mainpage";
 
-function App() {
-  return (
-    <>
-      <MainPage />
-    </>
-  );
-}
+const App = () => <MainPage />;
 
 export default App;

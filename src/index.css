@@ -1,22 +1,33 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
 @plugin 'tailwind-scrollbar';
 
-@theme {
-  --color-background: #ebe0d8;
-  --color-background2: #ebe0d8;
-  --color-base1: #e3d6cc;
-  --color-surface0: #d2c6bc;
-  --color-overlay1: #b9aea5;
-  --color-overlay2: #252526;
-  --color-text: #1e1e1e;
-  --color-red: #a2575a;
-  --color-blue: #586f86;
-  --color-peach: #a87a4f;
+@font-face {
+    font-family: "General Sans";
+    src: url("/fonts/GeneralSans-Variable.ttf") format("truetype");
+    font-weight: 200 600;
+    font-style: normal;
+    font-display: swap;
 }
 
-* {
-  /* font-family: "Nunito", sans-serif; */
-  font-family: "JetBrains Mono", monospace;
+@theme {
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-display: "General Sans", ui-sans-serif, system-ui, sans-serif;
+
+    --color-background: #ebe0d8;
+    --color-background2: #ebe0d8;
+    --color-base1: #e3d6cc;
+    --color-surface0: #d2c6bc;
+    --color-overlay1: #b9aea5;
+    --color-overlay2: #252526;
+    --color-text: #1e1e1e;
+    --color-red: #a2575a;
+    --color-blue: #586f86;
+    --color-peach: #a87a4f;
+}
+
+@layer base {
+    body {
+        font-family: var(--font-display);
+    }
 }

@@ -1,86 +1,40 @@
-import { useState, useRef } from "react";
-import { Modal } from "./modal";
+import { useRef, useState, type ReactNode } from "react";
 
-export const ProjectCard = ({
-  title,
-  desc,
-  date,
-  location,
-  content,
-  skills,
-}: {
-  title: string;
-  desc: string;
-  date: string;
-  location: string;
-  content?: React.ReactNode;
-  skills: string[];
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const cardRef = useRef<HTMLButtonElement>(null);
-  const [cardBounds, setCardBounds] = useState<DOMRect | null>(null);
+import { Card, type CardDetails } from "@/components/card";
+import { Modal } from "@/components/modal";
 
-  const isClickable = !!content;
+export type Project = CardDetails & {
+    /** Modal body. Omit it and the card renders as plain text. */
+    content?: ReactNode;
+};
 
-  const handleOpen = () => {
-    if (isClickable && cardRef.current) {
-      setCardBounds(cardRef.current.getBoundingClientRect());
-      setIsOpen(true);
-    }
-  };
+export const ProjectCard = ({ content, ...details }: Project) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [cardBounds, setCardBounds] = useState<DOMRect | null>(null);
+    const cardRef = useRef<HTMLButtonElement>(null);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+    const openModal = () => {
+        if (!cardRef.current) return;
+        setCardBounds(cardRef.current.getBoundingClientRect());
+        setIsOpen(true);
+    };
 
-  return (
-    <>
-      <button
-        className={`md:flex rounded-lg p-2 text-left border border-transparent hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg transition-all duration-300
-            ${content ? "hover:cursor-pointer" : "cursor-default"}
-            `}
-        ref={cardRef}
-        onClick={handleOpen}
-      >
-        <div className="flex md:mb-0 mb-2 text-sm text-text/70 shrink-0 w-50 me-4">
-          <p>{date}</p>
-        </div>
+    return (
+        <>
+            <Card
+                {...details}
+                ref={cardRef}
+                onClick={content ? openModal : undefined}
+            />
 
-        <div className="flex-col">
-          <div className="flex flex-col justify-center md:mb-4 mb-2">
-            <p className="font-bold text-sm md:text-text text-overlay2">
-              {title}
-            </p>
-            <p className="text-sm text-text/70">{location}</p>
-          </div>
-
-          <p className="font text-sm text-justify">{desc}</p>
-
-          <div className="flex">
-            {skills && skills.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-5">
-                {skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 text-xs rounded-full bg-overlay1 text-text border border-overlay1"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+            {content && (
+                <Modal
+                    isOpen={isOpen}
+                    handleClose={() => setIsOpen(false)}
+                    cardBounds={cardBounds}
+                    content={content}
+                />
             )}
-          </div>
-        </div>
-      </button>
-
-      {isClickable && (
-        <Modal
-          isOpen={isOpen}
-          handleClose={handleClose}
-          cardBounds={cardBounds}
-          content={content}
-        />
-      )}
-    </>
-  );
+        </>
+    );
 };

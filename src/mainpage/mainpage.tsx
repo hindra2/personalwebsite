@@ -1,240 +1,178 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { Contact } from "@/components/contacts";
 import { ExperienceCard } from "@/components/experience-card";
 import { ProjectCard } from "@/components/project-card";
 import { SectionButton } from "@/components/section-button";
+import { experiences } from "@/data/experience";
+import { projects } from "@/data/projects";
 
-import { ExplorifyModal } from "@/components/modals/explorify-modal";
-import { PermiasWebsiteModal } from "@/components/modals/permiaswebsite-modal";
+/** Only shown on mobile, where the side nav is hidden. */
+const SectionHeading = ({ children }: { children: ReactNode }) => (
+    <p className="font-mono md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
+        {children}
+    </p>
+);
 
 const MainPage = () => {
-  const [activeSection, setActiveSection] = useState<string>("about");
+    const [activeSection, setActiveSection] = useState("about");
 
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const experienceRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const scrollViewRef = useRef<HTMLDivElement>(null);
+    const aboutRef = useRef<HTMLDivElement>(null);
+    const experienceRef = useRef<HTMLDivElement>(null);
+    const projectsRef = useRef<HTMLDivElement>(null);
+    const scrollViewRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observerOptions = {
-      root: scrollViewRef.current,
-      rootMargin: "-20% 0px -70% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions,
-    );
-
-    // Observe all sections
     const sections = [
-      aboutRef.current,
-      experienceRef.current,
-      projectsRef.current,
+        { id: "about", label: "about me", ref: aboutRef },
+        { id: "experience", label: "experience", ref: experienceRef },
+        { id: "projects", label: "projects", ref: projectsRef },
     ];
-    sections.forEach((section) => {
-      if (section) observer.observe(section);
-    });
 
-    return () => {
-      sections.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActiveSection(entry.target.id);
+                });
+            },
+            {
+                root: scrollViewRef.current,
+                rootMargin: "-20% 0px -70% 0px",
+                threshold: 0,
+            },
+        );
+
+        [aboutRef.current, experienceRef.current, projectsRef.current]
+            .filter((section) => section !== null)
+            .forEach((section) => observer.observe(section));
+
+        return () => observer.disconnect();
+    }, []);
+
+    const scrollToSection = (section: (typeof sections)[number]) => {
+        setActiveSection(section.id);
+        section.ref.current?.scrollIntoView({ behavior: "smooth" });
     };
-  }, []);
 
-  const scrollToSection = (
-    id: string,
-    ref: React.RefObject<HTMLDivElement>,
-  ) => {
-    setActiveSection(id);
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <div
-      className="relative md:h-screen text-text md:flex bg-linear-to-br from-background2 to-background overflow-y-scroll scrollbar scrollbar-thumb-base1 scrollbar-track-background "
-      ref={scrollViewRef}
-    >
-      {/* Left section */}
-      <div className="w-[80%] h-full md:ps-40 ps-7 py-20 md:flex md:flex-col space-y-10 justify-between md:sticky md:top-0">
-        <div className="flex flex-col">
-          <span className="md:text-7xl text-5xl font-bold">Harold Indra</span>
-          <span className="md:text-3xl text-2xl">Software Engineer</span>
-          <span className="md:text-base text-sm">CS + Advertising @ UIUC</span>
-
-          {/* Sections */}
-          <div className="flex-col text-sm mt-5 space-y-3 gap-2 hidden md:flex">
-            <SectionButton
-              title="about me"
-              isActive={activeSection == "about"}
-              onClick={() => scrollToSection("about", aboutRef)}
-            />
-            <SectionButton
-              title="experience"
-              isActive={activeSection == "experience"}
-              onClick={() => scrollToSection("experience", experienceRef)}
-            />
-            <SectionButton
-              title="projects"
-              isActive={activeSection == "projects"}
-              onClick={() => scrollToSection("projects", projectsRef)}
-            />
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div>
-          <div className="flex gap-1.5 text-[0.6rem] mb-3 text-text/50">
-            <span>Website colors adapted from </span>
-            <a
-              href="https://github.com/nickberckley/kabadoni"
-              className="underline"
-            >
-              Kabadoni
-            </a>
-          </div>
-          <Contact />
-        </div>
-      </div>
-
-      {/* Right Section */}
-      <div className="w-full align-bottom md:py-20 md:pr-40 py-5 px-5">
-        <div className="py-8 text-justify font" id="about" ref={aboutRef}>
-          <p className="md:hidden font-extrabold mb-1 text-xl text-overlay2">
-            About Me
-          </p>
-          <span>I'm a developer from</span>
-          <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
-            {" "}
-            Jakarta, Indonesia
-          </span>
-          <span>
-            , driven by coffee and a desire to create software that solves real
-            problems and make a genuine impact. My passion for development
-            started with a love for puzzles, and over time, it's grown into a
-            fascination with the intersection of technology and design.
-          </span>
-
-          <br />
-          <br />
-
-          <>
-            <span>
-              I'm currently looking for opportunities in software engineering or
-              full-stack development positions, where I can build things that
-              not only work beautifully, but
-            </span>
-            <span className="italic"> feel</span>
-            <span> right to use.</span>
-          </>
-
-          <br />
-          <br />
-
-          <span>Outside of coding, you'll find me </span>
-          <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
-            speedcubing
-          </span>
-          <span> or trying to optimize a </span>
-          <span className="font-extrabold group hover:cursor-[url(/assets/dart.png),default]">
-            <span className="group-hover:text-blue">Bloons</span>
-            <span className="group-hover:text-peach"> TD 6</span>
-          </span>
-          <span> run.</span>
-        </div>
-
+    return (
         <div
-          className="flex flex-col py-8 space-y-2 gap-3"
-          id="experience"
-          ref={experienceRef}
+            className="relative md:h-screen text-text md:flex bg-linear-to-br from-background2 to-background overflow-y-scroll scrollbar scrollbar-thumb-base1 scrollbar-track-background"
+            ref={scrollViewRef}
         >
-          <p className="font-extrabold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
-            Experience
-          </p>
-          <ExperienceCard
-            title="Software Development Intern @ Temas TBK"
-            desc="Worked with a team to maintain old React codebases used for creating work and trucking orders by migrating and refactoring to LTS versions of outdated libraries, while also helping rewrite and refactor parts of a NodeJS backend of an internal tool for making work requests to Golang."
-            date="May - August 2025"
-            location="Jakarta, Indonesia"
-            link="https://temas.id/en"
-            skills={["ReactJS", "NodeJS", "TypeScript", "Golang"]}
-          />
-          <ExperienceCard
-            title="Software Engineer @ Tulip"
-            desc="Developed a frontend for a mobile application with React Native for an app that helps bring a stock market like perspective to real estate, while implementing and deploying a backend on AWS with flask for a price making on the beta website."
-            date="June 2024 - August 2025"
-            location="Urbana, Illinois"
-            link="https://tulip.markets"
-            skills={["React Native", "AWS", "Flask", "Typescript", "Python"]}
-          />
-        </div>
+            {/* Left section */}
+            <div className="w-[80%] h-full md:ps-40 ps-7 py-20 md:flex md:flex-col space-y-10 justify-between md:sticky md:top-0">
+                <div className="flex flex-col">
+                    <span className="md:text-7xl text-5xl font-bold">
+                        Harold Indra
+                    </span>
+                    <span className="md:text-3xl text-2xl">
+                        Software Engineer
+                    </span>
+                    <span className="md:text-base text-sm">
+                        CS + Advertising @ UIUC
+                    </span>
 
-        <div
-          className="flex flex-col py-8 space-y-2 gap-3"
-          id="projects"
-          ref={projectsRef}
-        >
-          <p className="font-extrabold md:font-normal mb-1 md:mb-0 text-xl md:text-base text-overlay2 md:text-text">
-            Projects
-          </p>
-          <ProjectCard
-            title="Explorifyy"
-            desc="Created a fullstack application using React Native and Supabase for an app to host events and share them in a feedlike application structure, filtered by location and interest categories."
-            date="February - March 2024"
-            location="Urbana, Illinois"
-            content={<ExplorifyModal />}
-            skills={[
-              "React Native",
-              "Supabase",
-              "TailwindCSS",
-              "Typescript",
-              "PSQL",
-            ]}
-            // link="https://apps.apple.com/us/app/explorifyy/id6739402841"
-          />
-          <ProjectCard
-            title="Akar.study"
-            desc="A fullstack web application built on ReactJS and Supabase, a flashcard website utilizng a basic spaced repitition algiorithm and a Pomodor timer to help boost productivity and learning."
-            date="April - February 2024"
-            location="Urbana, Illinois"
-            skills={[
-              "ReactJS",
-              "Supabase",
-              "TailwindCSS",
-              "Typescript",
-              "PSQL",
-            ]}
-          />
-          <ProjectCard
-            title="Permias Website"
-            desc="Created a website to promote the Indonesian Student Association (PERMIAS) at UIUC with ReactJS, showcasing events and information about the school to help new students get acclimated."
-            date="March - April 2024"
-            location="Urbana, Illinois"
-            content={<PermiasWebsiteModal />}
-            skills={["ReactJS", "Typescript", "TailwindCSS"]}
-          />
-          <ProjectCard
-            title="Talenta"
-            desc="Developed a frontend for an educational database for schools with NextJS, allowing for the administration and management of students, with the goal of enabling a more customized and informed learning experience. This was built for the Cozad New Venture Challenge and won $500."
-            date="January - April 2024"
-            location="Urbana, Illinois"
-            skills={["ReactJS", "Typescript", "TailwindCSS"]}
-          />
+                    {/* Sections */}
+                    <div className="flex-col text-sm mt-5 space-y-3 gap-2 hidden md:flex">
+                        {sections.map((section) => (
+                            <SectionButton
+                                key={section.id}
+                                title={section.label}
+                                isActive={activeSection === section.id}
+                                onClick={() => scrollToSection(section)}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* Footer */}
+                <div>
+                    <div className="flex gap-1.5 text-[0.6rem] mb-3 text-text/50">
+                        <span>Website colors adapted from </span>
+                        <a
+                            href="https://github.com/nickberckley/kabadoni"
+                            className="underline"
+                        >
+                            Kabadoni
+                        </a>
+                    </div>
+                    <Contact />
+                </div>
+            </div>
+
+            {/* Right Section */}
+            <div className="w-full align-bottom md:py-20 md:pr-40 py-5 px-5">
+                <div className="py-8 text-justify" id="about" ref={aboutRef}>
+                    <div className="md:hidden">
+                        <SectionHeading>About Me</SectionHeading>
+                    </div>
+
+                    <span>I'm a developer from</span>
+                    <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
+                        {" "}
+                        Jakarta, Indonesia
+                    </span>
+                    <span>
+                        , driven by a desire to create software that solves real
+                        problems and make a genuine impact. My passion for
+                        development started with a love for puzzles, and over
+                        time, it's grown into a fascination with the
+                        intersection of technology and design.
+                    </span>
+
+                    <br />
+                    <br />
+
+                    <span>
+                        I'm currently looking for opportunities in software
+                        engineering or full-stack development positions, where I
+                        can build things that not only work beautifully, but
+                    </span>
+                    <span className="italic"> feel</span>
+                    <span> right to use.</span>
+
+                    <br />
+                    <br />
+
+                    <span>Outside of coding, you'll find me </span>
+                    <span className="font-extrabold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
+                        speedcubing
+                    </span>
+                    <span> or trying to optimize a </span>
+                    <span className="font-extrabold group hover:cursor-[url(/assets/dart.png),default]">
+                        <span className="group-hover:text-blue">Bloons</span>
+                        <span className="group-hover:text-peach"> TD 6</span>
+                    </span>
+                    <span> run.</span>
+                </div>
+
+                <div
+                    className="flex flex-col py-8 space-y-2 gap-3"
+                    id="experience"
+                    ref={experienceRef}
+                >
+                    <SectionHeading>Experience</SectionHeading>
+                    {experiences.map((experience) => (
+                        <ExperienceCard
+                            key={experience.title}
+                            {...experience}
+                        />
+                    ))}
+                </div>
+
+                <div
+                    className="flex flex-col py-8 space-y-2 gap-3"
+                    id="projects"
+                    ref={projectsRef}
+                >
+                    <SectionHeading>Projects</SectionHeading>
+                    {projects.map((project) => (
+                        <ProjectCard key={project.title} {...project} />
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default MainPage;
