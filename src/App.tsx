@@ -14,7 +14,7 @@ const SectionHeading = ({ children }: { children: ReactNode }) => (
     </p>
 );
 
-const MainPage = () => {
+const App = () => {
     const [activeSection, setActiveSection] = useState("about");
 
     const aboutRef = useRef<HTMLDivElement>(null);
@@ -175,4 +175,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default App;
