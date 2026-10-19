@@ -1,0 +1,48 @@
+---
+/**
+ * Click any picture inside .prose-body to see it full size. A native <dialog>
+ * gives Esc-to-close and focus handling for free; any click closes it again.
+ */
+---
+
+<dialog
+    id="image-zoom"
+    class="m-auto max-w-none max-h-none bg-transparent p-0 outline-none backdrop:bg-background/90 cursor-zoom-out"
+>
+    <img class="max-w-[95vw] max-h-[95vh] object-contain rounded-lg shadow-2xl" alt="" />
+</dialog>
+
+<script>
+    const dialog = document.getElementById("image-zoom") as HTMLDialogElement;
+    const zoomed = dialog.querySelector("img")!;
+
+    document.querySelectorAll<HTMLImageElement>(".prose-body img").forEach((img) => {
+        img.classList.add("cursor-zoom-in");
+        img.addEventListener("click", () => {
+            zoomed.src = img.currentSrc || img.src;
+            zoomed.alt = img.alt;
+            dialog.showModal();
+        });
+    });
+
+    dialog.addEventListener("click", () => dialog.close());
+</script>
+
+<style>
+    dialog[open] {
+        animation: zoom-in 150ms ease-out;
+    }
+    dialog[open]::backdrop {
+        animation: fade-in 150ms ease-out;
+    }
+    /* Keep the page behind from scrolling while a picture is open. */
+    :global(html:has(dialog[open])) {
+        overflow: hidden;
+    }
+    @keyframes zoom-in {
+        from { opacity: 0; transform: scale(0.95); }
+    }
+    @keyframes fade-in {
+        from { opacity: 0; }
+    }
+</style>
