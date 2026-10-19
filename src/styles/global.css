@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@font-face {
+    font-family: "General Sans";
+    src: url("/fonts/GeneralSans-Variable.ttf") format("truetype");
+    font-weight: 200 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@theme {
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-display: "General Sans", ui-sans-serif, system-ui, sans-serif;
+
+    --color-background: #ebe0d8;
+    --color-background2: #ebe0d8;
+    --color-base1: #e3d6cc;
+    --color-surface0: #d2c6bc;
+    --color-overlay1: #b9aea5;
+    --color-overlay2: #252526;
+    --color-text: #1e1e1e;
+    --color-red: #a2575a;
+    --color-blue: #586f86;
+    --color-peach: #a87a4f;
+}
+
+@layer base {
+    body {
+        font-family: var(--font-display);
+    }
+}
+
+/*
+ * Rendered Markdown carries no classes, so it's styled from the wrapper.
+ * Shared by blog posts and project pages.
+ */
+.prose-body :is(h1, h2, h3) {
+    font-weight: 700;
+    margin: 2rem 0 0.75rem;
+}
+.prose-body h1 { font-size: 1.5rem; }
+.prose-body h2 { font-size: 1.25rem; }
+.prose-body h3 { font-size: 1.125rem; }
+.prose-body :is(p, ul, ol, blockquote, pre, table, img) {
+    margin: 1rem 0;
+}
+.prose-body p { line-height: 1.625; }
+.prose-body a { text-decoration: underline; }
+.prose-body a:hover { color: var(--color-blue); }
+.prose-body ul { list-style: disc; margin-left: 1.5rem; }
+.prose-body ol { list-style: decimal; margin-left: 1.5rem; }
+.prose-body li + li { margin-top: 0.25rem; }
+.prose-body blockquote {
+    border-left: 2px solid var(--color-overlay1);
+    padding-left: 1rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+.prose-body code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+}
+.prose-body :not(pre) > code {
+    background: var(--color-base1);
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem;
+}
+.prose-body pre {
+    /* Shiki inlines its own background; keep blocks on the site palette. */
+    background-color: var(--color-base1) !important;
+    border: 1px solid var(--color-overlay1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+.prose-body img { border-radius: 0.5rem; }
+.prose-body hr {
+    border-color: var(--color-overlay1);
+    margin: 2rem 0;
+}
+.prose-body table { font-size: 0.875rem; border-collapse: collapse; }
+.prose-body :is(th, td) {
+    border: 1px solid var(--color-overlay1);
+    padding: 0.25rem 0.75rem;
+    text-align: left;
+}

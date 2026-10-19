@@ -7,13 +7,6 @@ export type Experience = CardDetails & {
 
 export const ExperienceCard = ({ link, ...details }: Experience) => {
     return (
-        <Card
-            {...details}
-            onClick={
-                link
-                    ? () => window.open(link, "_blank", "noopener,noreferrer")
-                    : undefined
-            }
-        />
+        <Card {...details} href={link} />
     );
 };

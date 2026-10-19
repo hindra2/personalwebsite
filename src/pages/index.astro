@@ -1,0 +1,137 @@
+---
+import { getCollection } from "astro:content";
+
+import { Contact } from "@/components/contacts";
+import { ExperienceCard } from "@/components/experience-card";
+import { PostCard } from "@/components/post-card";
+import { Card } from "@/components/card";
+import SectionHeading from "@/components/section-heading.astro";
+import { SideNav } from "@/components/side-nav";
+import { experiences } from "@/data/experience";
+import Base from "@/layouts/base.astro";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const projects = (await getCollection("projects")).sort(
+    (a, b) => a.data.order - b.data.order,
+);
+
+const sections = [
+    { id: "about", label: "about me" },
+    { id: "experience", label: "experience" },
+    { id: "projects", label: "projects" },
+    { id: "blog", label: "blog" },
+];
+---
+
+<Base>
+    <div
+        id="scroll-view"
+        class="relative md:h-screen text-text md:flex bg-linear-to-br from-background2 to-background overflow-y-scroll scrollbar scrollbar-thumb-base1 scrollbar-track-background"
+    >
+        {/* Left section */}
+        <div class="w-[80%] h-full md:ps-40 ps-7 py-20 md:flex md:flex-col space-y-10 justify-between md:sticky md:top-0">
+            <div class="flex flex-col">
+                <span class="md:text-7xl text-5xl font-bold">Harold Indra</span>
+                <span class="md:text-3xl text-2xl">Software Engineer</span>
+                <span class="md:text-base text-sm">CS + Advertising @ UIUC</span>
+
+                <SideNav client:load sections={sections} scrollViewId="scroll-view" />
+            </div>
+
+            {/* Footer */}
+            <div>
+                <div class="flex gap-1.5 text-[0.6rem] mb-3 text-text/50">
+                    <span>Website colors adapted from </span>
+                    <a href="https://github.com/nickberckley/kabadoni" class="underline">
+                        Kabadoni
+                    </a>
+                </div>
+                <Contact client:idle />
+            </div>
+        </div>
+
+        {/* Right Section */}
+        <div class="w-full align-bottom md:py-20 md:pr-40 py-5 px-5">
+            <div class="py-8 text-justify" id="about">
+                <div class="md:hidden">
+                    <SectionHeading>About Me</SectionHeading>
+                </div>
+
+                <span>I'm a developer from</span>
+                <span class="font-extrabold hover:text-red hover:cursor-[url(/assets/flag.png),default]">
+                    {" "}Jakarta, Indonesia
+                </span>
+                <span>
+                    , driven by a desire to create software that solves real
+                    problems and make a genuine impact. My passion for
+                    development started with a love for puzzles, and over time,
+                    it's grown into a fascination with the intersection of
+                    technology and design.
+                </span>
+
+                <br />
+                <br />
+
+                <span>
+                    I'm currently looking for opportunities in software
+                    engineering or full-stack development positions, where I can
+                    build things that not only work beautifully, but
+                </span>
+                <span class="italic"> feel</span>
+                <span> right to use.</span>
+
+                <br />
+                <br />
+
+                <span>Outside of coding, you'll find me </span>
+                <span class="font-extrabold hover:text-red hover:cursor-[url(/assets/cube.png),default]">
+                    speedcubing
+                </span>
+                <span> or trying to optimize a </span>
+                <span class="font-extrabold group hover:cursor-[url(/assets/dart.png),default]">
+                    <span class="group-hover:text-blue">Bloons</span>
+                    <span class="group-hover:text-peach"> TD 6</span>
+                </span>
+                <span> run.</span>
+            </div>
+
+            <div class="flex flex-col py-8 space-y-2 gap-3" id="experience">
+                <SectionHeading>Experience</SectionHeading>
+                {experiences.map((experience) => <ExperienceCard {...experience} />)}
+            </div>
+
+            <div class="flex flex-col py-8 space-y-2 gap-3" id="projects">
+                <SectionHeading>Projects</SectionHeading>
+                {
+                    projects.map((project) => (
+                        <Card
+                            {...project.data}
+                            href={
+                                project.body?.trim()
+                                    ? `/projects/${project.id}`
+                                    : undefined
+                            }
+                        />
+                    ))
+                }
+            </div>
+
+            <div class="flex flex-col py-8 space-y-2 gap-3" id="blog">
+                <SectionHeading>Blog</SectionHeading>
+                {
+                    posts.map((post) => (
+                        <PostCard
+                            title={post.data.title}
+                            date={post.data.date}
+                            summary={post.data.summary}
+                            href={`/blog/${post.id}`}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</Base>

@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from "astro:content";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+
+import { SkillTags } from "@/components/skill-tags";
+import Base from "@/layouts/base.astro";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects
+        .filter((project) => project.body?.trim())
+        .map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { title, desc, date, location, skills, link } = project.data;
+const { Content } = await render(project);
+---
+
+<Base title={`${title} — Harold Indra`} description={desc}>
+    <div class="min-h-screen text-text bg-linear-to-br from-background2 to-background">
+        <div class="max-w-2xl mx-auto px-5 py-12 md:py-20">
+            <a
+                href="/#projects"
+                class="inline-flex items-center gap-1 text-sm font-mono text-text/70 hover:text-text"
+            >
+                <ArrowLeft size={16} /> back
+            </a>
+
+            <article class="mt-8">
+                <p class="text-sm font-mono text-text/70">{date} · {location}</p>
+                <h1 class="md:text-5xl text-4xl font-bold mt-2 mb-4 flex items-center">
+                    {title}
+                    {
+                        link && (
+                            <a
+                                href={link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Open ${title}`}
+                                class="ml-2 transition-transform duration-200 hover:translate-x-1 hover:-translate-y-1"
+                            >
+                                <ArrowUpRight size={32} />
+                            </a>
+                        )
+                    }
+                </h1>
+                <SkillTags skills={skills} />
+                <div class="prose-body mt-8">
+                    <Content />
+                </div>
+            </article>
+        </div>
+    </div>
+</Base>

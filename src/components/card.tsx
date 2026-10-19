@@ -1,5 +1,3 @@
-import type { Ref } from "react";
-
 import { SkillTags } from "@/components/skill-tags";
 import { cn } from "@/lib/utils";
 
@@ -11,29 +9,26 @@ export type CardDetails = {
     skills: string[];
 };
 
-/** Shared layout for the experience and project entries. */
+export const cardClassName =
+    "md:flex rounded-lg p-2 text-left border border-transparent transition-all duration-300 hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg";
+
+/**
+ * Shared layout for the experience and project entries. Given `href` it's a
+ * plain link, so it works without any client-side JS. External links (the
+ * experience entries) open in a new tab; a project's own page doesn't.
+ */
 export const Card = ({
     title,
     desc,
     date,
     location,
     skills,
-    onClick,
-    ref,
+    href,
 }: CardDetails & {
-    onClick?: () => void;
-    ref?: Ref<HTMLButtonElement>;
+    href?: string;
 }) => {
-    return (
-        <button
-            ref={ref}
-            onClick={onClick}
-            className={cn(
-                "md:flex rounded-lg p-2 text-left border border-transparent transition-all duration-300",
-                "hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg",
-                onClick ? "hover:cursor-pointer" : "cursor-default",
-            )}
-        >
+    const body = (
+        <>
             <div className="flex md:mb-0 mb-2 text-sm text-text/70 shrink-0 w-50 me-4 font-mono">
                 <p>{date}</p>
             </div>
@@ -52,6 +47,22 @@ export const Card = ({
                     <SkillTags skills={skills} />
                 </div>
             </div>
-        </button>
+        </>
     );
+
+    if (href) {
+        const external = href.startsWith("http");
+        return (
+            <a
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                className={cardClassName}
+            >
+                {body}
+            </a>
+        );
+    }
+
+    return <div className={cn(cardClassName, "cursor-default")}>{body}</div>;
 };

@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from "astro:content";
+import { ArrowLeft } from "lucide-react";
+
+import Base from "@/layouts/base.astro";
+import { formatDate } from "@/lib/utils";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={`${post.data.title} — Harold Indra`} description={post.data.summary}>
+    <div class="min-h-screen text-text bg-linear-to-br from-background2 to-background">
+        <div class="max-w-2xl mx-auto px-5 py-12 md:py-20">
+            <a
+                href="/#blog"
+                class="inline-flex items-center gap-1 text-sm font-mono text-text/70 hover:text-text"
+            >
+                <ArrowLeft size={16} /> back
+            </a>
+
+            <article class="mt-8">
+                <p class="text-sm font-mono text-text/70">{formatDate(post.data.date)}</p>
+                <h1 class="md:text-5xl text-4xl font-bold mt-2 mb-8">{post.data.title}</h1>
+                <div class="prose-body">
+                    <Content />
+                </div>
+            </article>
+        </div>
+    </div>
+</Base>
+
