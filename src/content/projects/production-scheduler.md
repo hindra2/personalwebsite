@@ -13,6 +13,10 @@ I built this for a plastic injection-molding factory in Jakarta that runs 24/7 a
 
 It's in use every day at the factory, and I'm still adding to it as new needs come up.
 
+## Images
+
+![Screenshot of the Permias UIUC website](/assets/projects/permiaswebsite.png)
+
 ## Features
 
 - An interactive Gantt chart for every machine, built from scratch without a charting library

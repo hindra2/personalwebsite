@@ -1,5 +1,9 @@
-import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 
+/**
+ * Plain CSS transitions rather than motion: motion's opacity animation flashes
+ * the previous value for a frame when it finishes, which flickers the nav.
+ */
 export const SectionButton = ({
     title,
     isActive,
@@ -10,38 +14,28 @@ export const SectionButton = ({
     onClick?: () => void;
 }) => {
     return (
-        <motion.button
-            className="flex items-center w-fit"
-            whileHover="hover"
-            initial="rest"
-            animate={isActive ? "active" : "rest"}
+        <button
+            className="group flex items-center w-fit hover:cursor-pointer"
             onClick={onClick}
         >
-            <motion.div
-                className="h-0.5 w-6 bg-text origin-left mr-[5px]"
-                variants={{
-                    rest: { scaleX: 1, opacity: 0.4 },
-                    hover: { scaleX: 2, opacity: 1 },
-                    active: { scaleX: 2, opacity: 1 },
-                }}
-                transition={{
-                    duration: 0.1,
-                    type: "tween",
-                }}
+            <div
+                className={cn(
+                    "h-0.5 w-6 bg-text origin-left mr-[5px] transition duration-100 ease-out",
+                    isActive
+                        ? "scale-x-200 opacity-100"
+                        : "opacity-40 group-hover:scale-x-200 group-hover:opacity-100",
+                )}
             />
-            <motion.span
-                variants={{
-                    rest: { x: 0, opacity: 0.4 },
-                    hover: { x: 24, opacity: 1 },
-                    active: { x: 24, opacity: 1 },
-                }}
-                transition={{
-                    duration: 0.1,
-                    type: "tween",
-                }}
+            <span
+                className={cn(
+                    "transition duration-100 ease-out",
+                    isActive
+                        ? "translate-x-6 opacity-100"
+                        : "opacity-40 group-hover:translate-x-6 group-hover:opacity-100",
+                )}
             >
                 {title}
-            </motion.span>
-        </motion.button>
+            </span>
+        </button>
     );
 };

@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { ArrowLeft } from "lucide-react";
 
+import ImageZoom from "@/components/image-zoom.astro";
 import Base from "@/layouts/base.astro";
 import { formatDate } from "@/lib/utils";
 
@@ -14,9 +15,9 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base title={`${post.data.title} — Harold Indra`} description={post.data.summary}>
+<Base description={post.data.summary}>
     <div class="min-h-screen text-text bg-linear-to-br from-background2 to-background">
-        <div class="max-w-2xl mx-auto px-5 py-12 md:py-20">
+        <div class="max-w-3xl mx-auto px-5 py-12 md:py-20">
             <a
                 href="/#blog"
                 class="inline-flex items-center gap-1 text-sm font-mono text-text/70 hover:text-text"
@@ -33,5 +34,7 @@ const { Content } = await render(post);
             </article>
         </div>
     </div>
+
+    <ImageZoom />
 </Base>
 

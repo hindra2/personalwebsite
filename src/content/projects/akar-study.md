@@ -6,3 +6,7 @@ location: Urbana, Illinois
 skills: ["React", "Supabase", "TailwindCSS", "TypeScript", "PostgreSQL"]
 order: 3
 ---
+
+## Images
+
+![Screenshots of akar](/assets/projects/akar.png)

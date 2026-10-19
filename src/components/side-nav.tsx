@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { SectionButton } from "@/components/section-button";
 
@@ -12,13 +12,24 @@ export const SideNav = ({
 }) => {
     const [activeSection, setActiveSection] = useState(sections[0]?.id);
 
+    // Set while a nav click is smooth-scrolling, so the sections it passes on
+    // the way don't each take the highlight. Cleared once scrolling settles.
+    const scrollLock = useRef<number | null>(null);
+
+    const holdScrollLock = () => {
+        if (scrollLock.current !== null) clearTimeout(scrollLock.current);
+        scrollLock.current = window.setTimeout(() => {
+            scrollLock.current = null;
+        }, 150);
+    };
+
     useEffect(() => {
         const scrollView = document.getElementById(scrollViewId);
 
         // A short last section never reaches the observer band, so it's
         // claimed whenever the view is scrolled to the bottom.
         const claimLastAtBottom = () => {
-            if (!scrollView) return;
+            if (!scrollView || scrollLock.current !== null) return;
             const { scrollTop, clientHeight, scrollHeight } = scrollView;
             if (scrollTop + clientHeight >= scrollHeight - 2) {
                 setActiveSection(sections[sections.length - 1]?.id);
@@ -27,6 +38,7 @@ export const SideNav = ({
 
         const observer = new IntersectionObserver(
             (entries) => {
+                if (scrollLock.current !== null) return;
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) setActiveSection(entry.target.id);
                 });
@@ -44,18 +56,23 @@ export const SideNav = ({
             .filter((section) => section !== null)
             .forEach((section) => observer.observe(section));
 
-        scrollView?.addEventListener("scroll", claimLastAtBottom, {
-            passive: true,
-        });
+        const onScroll = () => {
+            if (scrollLock.current !== null) holdScrollLock();
+            else claimLastAtBottom();
+        };
+
+        scrollView?.addEventListener("scroll", onScroll, { passive: true });
 
         return () => {
             observer.disconnect();
-            scrollView?.removeEventListener("scroll", claimLastAtBottom);
+            scrollView?.removeEventListener("scroll", onScroll);
         };
     }, [sections, scrollViewId]);
 
     const scrollToSection = (id: string) => {
         setActiveSection(id);
+        // Also releases the lock if the click doesn't scroll at all.
+        holdScrollLock();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
 
