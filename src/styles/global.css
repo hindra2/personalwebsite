@@ -75,7 +75,6 @@
     padding: 1rem;
     overflow-x: auto;
 }
-.prose-body img { border-radius: 0.5rem; }
 .prose-body hr {
     border-color: var(--color-overlay1);
     margin: 2rem 0;
