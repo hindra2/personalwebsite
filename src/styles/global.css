@@ -1,6 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @import "tailwindcss";
 @plugin 'tailwind-scrollbar';
+
+@font-face {
+    font-family: "Paper Mono";
+    src: url("/fonts/PaperMono-Variable.ttf") format("truetype");
+    font-weight: 100 800;
+    font-style: normal;
+    font-display: swap;
+}
 
 @font-face {
     font-family: "General Sans";
@@ -11,7 +18,7 @@
 }
 
 @theme {
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-mono: "Paper Mono", ui-monospace, monospace;
     --font-display: "General Sans", ui-sans-serif, system-ui, sans-serif;
 
     --color-background: #ebe0d8;
