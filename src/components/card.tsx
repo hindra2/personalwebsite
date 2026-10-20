@@ -10,7 +10,7 @@ export type CardDetails = {
 };
 
 export const cardClassName =
-    "md:flex rounded-lg p-2 text-left border border-transparent transition-all duration-300 hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg";
+    "md:flex p-2 text-left border border-transparent transition-all duration-300 hover:border-overlay1 hover:bg-overlay1/10 hover:backdrop-blur-sm hover:shadow-lg";
 
 /**
  * Shared layout for the experience and project entries. Given `href` it's a

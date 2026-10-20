@@ -20,7 +20,7 @@ export const SectionButton = ({
         >
             <div
                 className={cn(
-                    "h-0.5 w-6 bg-text origin-left mr-[5px] transition duration-100 ease-out",
+                    "h-0.5 w-6 bg-text origin-left mr-1.25 transition duration-100 ease-out",
                     isActive
                         ? "scale-x-200 opacity-100"
                         : "opacity-40 group-hover:scale-x-200 group-hover:opacity-100",

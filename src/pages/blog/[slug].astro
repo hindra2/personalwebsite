@@ -1,9 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
-import { ArrowLeft } from "lucide-react";
 
-import ImageZoom from "@/components/image-zoom.astro";
-import Base from "@/layouts/base.astro";
+import Article from "@/layouts/article.astro";
 import { formatDate } from "@/lib/utils";
 
 export async function getStaticPaths() {
@@ -15,26 +13,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base description={post.data.summary}>
-    <div class="min-h-screen text-text bg-linear-to-br from-background2 to-background">
-        <div class="max-w-3xl mx-auto px-5 py-12 md:py-20">
-            <a
-                href="/#blog"
-                class="inline-flex items-center gap-1 text-sm font-mono text-text/70 hover:text-text"
-            >
-                <ArrowLeft size={16} /> back
-            </a>
-
-            <article class="mt-8">
-                <p class="text-sm font-mono text-text/70">{formatDate(post.data.date)}</p>
-                <h1 class="md:text-5xl text-4xl font-bold mt-2 mb-8">{post.data.title}</h1>
-                <div class="prose-body">
-                    <Content />
-                </div>
-            </article>
-        </div>
+<Article description={post.data.summary} backHref="/#blog">
+    <p class="text-sm font-mono text-text/70">{formatDate(post.data.date)}</p>
+    <h1 class="md:text-5xl text-4xl font-bold mt-2 mb-8">{post.data.title}</h1>
+    <div class="prose-body">
+        <Content />
     </div>
-
-    <ImageZoom />
-</Base>
-
+</Article>

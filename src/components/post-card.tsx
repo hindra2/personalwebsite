@@ -1,30 +1,37 @@
-import { cardClassName } from "@/components/card";
-import { formatDate } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 
-/** Blog list entry, laid out like the experience and project cards. */
+import { cardClassName } from "@/components/card";
+import { formatDate, cn } from "@/lib/utils";
+
+/**
+ * Blog list entry: just the date and title. Uses the same card hover as the
+ * experience and project entries, with the date in the same column.
+ */
 export const PostCard = ({
     title,
     date,
-    summary,
     href,
 }: {
     title: string;
     date: Date;
-    summary: string;
     href: string;
 }) => {
     return (
-        <a href={href} className={cardClassName}>
-            <div className="flex md:mb-0 mb-2 text-sm text-text/70 shrink-0 w-50 me-4 font-mono">
-                <p>{formatDate(date)}</p>
-            </div>
+        <a href={href} className={cn(cardClassName, "group md:items-baseline")}>
+            <time
+                dateTime={date.toISOString()}
+                className="block text-sm text-text/70 font-mono shrink-0 md:w-50 md:me-4 mb-1 md:mb-0"
+            >
+                {formatDate(date)}
+            </time>
 
-            <div className="flex-col">
-                <p className="font-bold text-sm md:text-text text-overlay2 md:mb-4 mb-2">
-                    {title}
-                </p>
-                <p className="text-sm text-justify">{summary}</p>
-            </div>
+            <span className="flex items-center gap-2 font-bold text-sm md:text-text text-overlay2">
+                {title}
+                <ArrowRight
+                    size={14}
+                    className="shrink-0 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-70 group-hover:translate-x-0"
+                />
+            </span>
         </a>
     );
 };

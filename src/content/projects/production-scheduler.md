@@ -15,11 +15,11 @@ It's in use every day at the factory, and I'm still adding to it as new needs co
 
 ## Images
 
-![Screenshot of the Permias UIUC website](/assets/projects/permiaswebsite.png)
+![Screenshot of the scheduler program](/assets/projects/scheduler.png)
 
 ## Features
 
-- An interactive Gantt chart for every machine, built from scratch without a charting library
+- An interactive Gantt chart for every machine, built from scratch
 - Dragging a job that's already started moves its recorded production with it, so the history stays accurate
 - Daily shift input that recalculates output, run rate and projected finish dates from the raw entries, so a typo can be fixed after the fact
 - Access control enforced in the database with Postgres row-level security, plus a local copy of the database for testing changes before they reach the factory
